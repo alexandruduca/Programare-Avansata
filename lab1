@@ -1,0 +1,29 @@
+public class laborator1 {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+        String languages[]={"C", "C++", "C#", "Python", "Go", "Rust", "JavaScript", "PHP", "Swift", "Java"};
+        int n = (int) (Math.random() * 1_000_000);
+        CalculN(n, languages);
+
+    }
+    public static void CalculN(int n, String languages[])
+    {
+        n*=3;
+        n+=Integer.parseInt("10101", 2);
+        n+=Integer.parseInt("FF", 16);
+        n*=6;
+        int result=0;
+        while(n>9)
+        {
+            while(n>0)
+            {
+                result+=n%10;
+                n/=10;
+            }
+            n=result;
+            result=0;
+        }
+        result=n;
+        System.out.println("Willy-nilly, this semester I will learn " + languages[result]);
+    }
+}
