@@ -40,8 +40,9 @@ public class DaoMovie {
      *
      * @param id is the id of the movie
      * @throws SQLException
+     * @return
      */
-    public void findById(int id) throws SQLException {
+    public Movie findById(int id) throws SQLException {
         String query = "SELECT * FROM movies WHERE id = ?";
         PreparedStatement preparedStmt = database.con.prepareStatement(query);
         preparedStmt.setInt(1, id);
@@ -52,15 +53,18 @@ public class DaoMovie {
             Date release_date = rs.getDate("release_date");
             int duration = rs.getInt("duration");
             double score = rs.getDouble("score");
+            Movie movie = new Movie(id, title, release_date, duration, score);
             System.out.println("Movie with id " + id + " : " + title
                     + " , release date: " + release_date
                     + " , duration: " + duration
                     + " , score: " + score
                     + ".");
             found = true;
+            return movie;
         }
         if (!found)
             System.out.println("Movie with id " + id + " is not in the database.");
+        return null;
     }
 
     /**
@@ -68,8 +72,9 @@ public class DaoMovie {
      *
      * @param title is the title of the movie
      * @throws SQLException
+     * @return
      */
-    public void findByTitle(String title) throws SQLException {
+    public Movie findByTitle(String title) throws SQLException {
         String query = "SELECT * FROM movies WHERE title = ?";
         PreparedStatement preparedStmt = database.con.prepareStatement(query);
         preparedStmt.setString(1, title);
@@ -80,15 +85,18 @@ public class DaoMovie {
             Date release_date = rs.getDate("release_date");
             int duration = rs.getInt("duration");
             double score = rs.getDouble("score");
+            Movie movie = new Movie(id, title, release_date, duration, score);
             System.out.println("Id of movie with title " + title + " : " + id
                     + " , release date: " + release_date
                     + " , duration: " + duration
                     + " , score: " + score
                     + ".");
             found = true;
+            return movie;
         }
         if (!found)
             System.out.println("Movie " + title + " is not in the database.");
+        return null;
     }
 
     /**

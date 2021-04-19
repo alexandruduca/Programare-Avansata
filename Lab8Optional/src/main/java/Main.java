@@ -60,24 +60,33 @@ public class Main {
 //        daoDirector.create(director1);
 
 
-        System.out.println();
-        daoMovie.findById(3);
-        daoMovie.findById(5);
-        daoMovie.findByTitle("Avatar");
-        daoMovie.findByTitle("Benjamin Button");
-
-        daoGenre.findById(1);
-        daoGenre.findById(3);
-        daoGenre.findByName("DRAMA");
-        daoGenre.findByName("CRIME");
-
-        List<String> actors = daoMovie.getActors("The Godfather");
-        System.out.println("The actors of the movie 'The GodFather': " + actors + ".");
-
-        List<String> directors = daoMovie.getDirectors("The Godfather");
-        System.out.println("The directors of the movie 'The Godfather': " + directors + ".");
-
+//        System.out.println();
+//        daoMovie.findById(3);
+//        daoMovie.findById(5);
+//        daoMovie.findByTitle("Avatar");
+//        daoMovie.findByTitle("Benjamin Button");
+//
+//        daoGenre.findById(1);
+//        daoGenre.findById(3);
+//        daoGenre.findByName("DRAMA");
+//        daoGenre.findByName("CRIME");
+//
+//        List<String> actors = daoMovie.getActors("The Godfather");
+//        System.out.println("The actors of the movie 'The GodFather': " + actors + ".");
+//
+//        List<String> directors = daoMovie.getDirectors("The Godfather");
+//        System.out.println("The directors of the movie 'The Godfather': " + directors + ".");
 //        scanLinesFromIMDB();
+
+        Movie movie = daoMovie.findById(3);
+        System.out.println(movie);
+        Movie movie1 = daoMovie.findByTitle("Avatar");
+        System.out.println(movie1);
+
+        Genre genre = daoGenre.findById(1);
+        System.out.println(genre);
+        Genre genre1 = daoGenre.findByName("DRAMA");
+        System.out.println(genre1);
 
     }
 }

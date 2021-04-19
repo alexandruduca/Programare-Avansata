@@ -37,8 +37,9 @@ public class DaoGenre {
      *
      * @param id is the id of the genre
      * @throws SQLException
+     * @return
      */
-    public void findById(int id) throws SQLException {
+    public Genre findById(int id) throws SQLException {
         String query = "SELECT * FROM genres WHERE id = ?";
         PreparedStatement preparedStmt = database.con.prepareStatement(query);
         preparedStmt.setInt(1, id);
@@ -47,10 +48,13 @@ public class DaoGenre {
         while (rs.next()) {
             String name = rs.getString("name");
             System.out.println("Genre with id " + id + " : " + name + ".");
+            Genre genre = new Genre(id, name);
             found = true;
+            return genre;
         }
         if (!found)
             System.out.println("Genre with id " + id + " is not in the database.");
+        return null;
     }
 
     /**
@@ -58,8 +62,9 @@ public class DaoGenre {
      *
      * @param name is the name of the genre
      * @throws SQLException
+     * @return
      */
-    public void findByName(String name) throws SQLException {
+    public Genre findByName(String name) throws SQLException {
         String query = "SELECT * FROM genres WHERE name = ?";
         PreparedStatement preparedStmt = database.con.prepareStatement(query);
         preparedStmt.setString(1, name);
@@ -68,9 +73,12 @@ public class DaoGenre {
         while (rs.next()) {
             int id = rs.getInt("id");
             System.out.println("Id of genre with name " + name + " : " + id + ".");
+            Genre genre = new Genre(id, name);
             found = true;
+            return genre;
         }
         if (!found)
             System.out.println("Genre with name " + name + " is not in the database.");
+        return null;
     }
 }
