@@ -1,4 +1,3 @@
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Connect4 {
@@ -17,7 +16,7 @@ public class Connect4 {
         this.currentPlayer = new Player('N');
     }
 
-    public void play() throws SQLException, ClassNotFoundException {
+    public void play() {
         boolean winner = false;
         boolean draw = false;
         boolean validate;
@@ -109,8 +108,7 @@ public class Connect4 {
     public char switchRound(char turn) {
         if (turn == 'R')
             return 'Y';
-        else
-            return 'R';
+        return 'R';
     }
 
 }

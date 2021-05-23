@@ -1,7 +1,6 @@
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import exception.InvalidIdException;
+
+import java.sql.*;
 
 public class PlayerDao {
     Database database;
@@ -29,7 +28,29 @@ public class PlayerDao {
         } catch (SQLException exception) {
             exception.printStackTrace();
         }
-
-
     }
+
+    public void findById(int id) {
+        try {
+            String query = "SELECT * FROM connect4 WHERE id = ?";
+            PreparedStatement preparedStmt = database.con.prepareStatement(query);
+            preparedStmt.setInt(1, id);
+            ResultSet rs = preparedStmt.executeQuery();
+            boolean found = false;
+            while (rs.next()) {
+                String player1 = rs.getString("player1");
+                String player2 = rs.getString("player2");
+                String winner = rs.getString("winner");
+                found = true;
+                System.out.println("The game no. " + id + " -> red: " + player1 + ", yellow: " + player2 + ", winner: " + winner);
+            }
+            if (!found)
+                throw new InvalidIdException(id);
+
+        } catch (SQLException | InvalidIdException exception) {
+            exception.printStackTrace();
+        }
+    }
+
 }
+
